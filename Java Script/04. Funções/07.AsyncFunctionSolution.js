@@ -1,16 +1,17 @@
 function delay() {
-  return new Promise(resolve => {
-    setTimeout(resolve, 1000);
+  return new Promise((resolve) => {
+    setTimeout(resolve, 3000);
   });
 }
 
-async function doSomethingThatNeedsTime() {
+async function doSomenthingThatNeedsTime() {
   await delay();
   return {
-    status: 200
+    status: 200,
   };
 }
 
-doSomethingThatNeedsTime().then((result) => {
-  console.log(result);
-});
+(async () => {
+  const resultado = await doSomenthingThatNeedsTime();
+  console.log(resultado);
+})();
