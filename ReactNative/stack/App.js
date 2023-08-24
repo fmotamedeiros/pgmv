@@ -1,4 +1,4 @@
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
@@ -10,7 +10,9 @@ function Login() {
   return (
     <View style={styles.container}>
       <Text>Login!</Text>
-      <Button title='Entrar' onPress={() => navigator.replace('Home')}></Button>
+      <Button title='Entrar' onPress={() => navigator.replace('Home', {
+        user: 'Flávio Medeiros',
+      })}></Button>
       <StatusBar style="auto" />
     </View>
   );
@@ -18,10 +20,14 @@ function Login() {
 
 function Home() {
   const navigator = useNavigation();
+  const router = useRoute();
+
+  const { user } = router.params;
 
   return (
     <View style={styles.container}>
       <Text>Home!</Text>
+      <Text>{user}</Text>
       <Button title='Sair' onPress={() => navigator.replace('Login')}></Button>
       <StatusBar style="auto" />
     </View>
